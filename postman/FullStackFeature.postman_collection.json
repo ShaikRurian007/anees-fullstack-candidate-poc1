@@ -1,13 +1,13 @@
 {
   "info": {
-    "name": "Candidate Full\u2011Stack PoC",
+    "name": "Candidate Full-Stack PoC",
     "_postman_id": "f6f2a2d0-0000-4e2f-aaaa-000000000001",
-    "description": "APIs for scoring and feedback",
+    "description": "APIs for scoring and feedback generation",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
-      "name": "Generate Score",
+      "name": "Generate Score (Production)",
       "request": {
         "method": "POST",
         "header": [
@@ -17,22 +17,33 @@
           }
         ],
         "url": {
-          "raw": "{{base}}/generate-score",
+          "raw": "https://anees-candidate-poc-c2azfjg9ejeygseg.eastus2-01.azurewebsites.net/api/generate-score",
+          "protocol": "https",
           "host": [
-            "{{base}}"
+            "anees-candidate-poc-c2azfjg9ejeygseg",
+            "eastus2-01",
+            "azurewebsites",
+            "net"
           ],
           "path": [
+            "api",
             "generate-score"
           ]
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"candidate\": {\n    \"id\": 1,\n    \"name\": \"Ananya Gupta\",\n    \"email\": \"ananya@example.com\",\n    \"experience\": 4,\n    \"skills\": [\n      \"JavaScript\",\n      \"React\",\n      \"Node.js\",\n      \"SQL\"\n    ]\n  }\n}"
+          "raw": "{\n  \"candidate\": {\n    \"id\": 1,\n    \"name\": \"Ananya Gupta\",\n    \"email\": \"ananya@example.com\",\n    \"experience\": 4,\n    \"skills\": [\n      \"JavaScript\",\n      \"React\",\n      \"Node.js\",\n      \"SQL\"\n    ]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
         }
-      }
+      },
+      "response": []
     },
     {
-      "name": "Generate Feedback",
+      "name": "Generate Feedback (Production)",
       "request": {
         "method": "POST",
         "header": [
@@ -42,20 +53,100 @@
           }
         ],
         "url": {
-          "raw": "{{base}}/generate-feedback",
+          "raw": "https://anees-candidate-poc-c2azfjg9ejeygseg.eastus2-01.azurewebsites.net/api/generate-feedback",
+          "protocol": "https",
           "host": [
-            "{{base}}"
+            "anees-candidate-poc-c2azfjg9ejeygseg",
+            "eastus2-01",
+            "azurewebsites",
+            "net"
           ],
           "path": [
+            "api",
             "generate-feedback"
           ]
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"candidate\": {\n    \"id\": 1,\n    \"name\": \"Ananya Gupta\",\n    \"email\": \"ananya@example.com\",\n    \"experience\": 4,\n    \"skills\": [\n      \"JavaScript\",\n      \"React\",\n      \"Node.js\",\n      \"SQL\"\n    ]\n  }\n}"
+          "raw": "{\n  \"candidate\": {\n    \"id\": 1,\n    \"name\": \"Ananya Gupta\",\n    \"email\": \"ananya@example.com\",\n    \"experience\": 4,\n    \"skills\": [\n      \"JavaScript\",\n      \"React\",\n      \"Node.js\",\n      \"SQL\"\n    ]\n  },\n  \"score\": {\n    \"overallScore\": 75,\n    \"gaps\": [\"TypeScript\", \"Docker\"]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
         }
-      }
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Score (via Netlify)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://anees-candidatepoc.netlify.app/api/generate-score",
+          "protocol": "https",
+          "host": [
+            "anees-candidatepoc",
+            "netlify",
+            "app"
+          ],
+          "path": [
+            "api",
+            "generate-score"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"candidate\": {\n    \"id\": 2,\n    \"name\": \"Rahul Menon\",\n    \"email\": \"rahul@example.com\",\n    \"experience\": 2,\n    \"skills\": [\n      \"Python\",\n      \"Flask\",\n      \"PostgreSQL\"\n    ]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Feedback (via Netlify)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://anees-candidatepoc.netlify.app/api/generate-feedback",
+          "protocol": "https",
+          "host": [
+            "anees-candidatepoc",
+            "netlify",
+            "app"
+          ],
+          "path": [
+            "api",
+            "generate-feedback"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"candidate\": {\n    \"id\": 2,\n    \"name\": \"Rahul Menon\",\n    \"email\": \"rahul@example.com\",\n    \"experience\": 2,\n    \"skills\": [\n      \"Python\",\n      \"Flask\",\n      \"PostgreSQL\"\n    ]\n  },\n  \"score\": {\n    \"overallScore\": 65,\n    \"gaps\": [\"JavaScript\", \"React\", \"CI/CD\"]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
     }
-  ],
-  "event": []
+  ]
 }
