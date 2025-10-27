@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "name": "Ananya Gupta",
+    "email": "ananya@example.com",
+    "experience": 4,
+    "skills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "SQL",
+      "Docker",
+      "CI/CD"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Rahul Menon",
+    "email": "rahul@example.com",
+    "experience": 2,
+    "skills": [
+      "Python",
+      "Flask",
+      "PostgreSQL",
+      "Pandas"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Priya Sharma",
+    "email": "priya@example.com",
+    "experience": 6,
+    "skills": [
+      "TypeScript",
+      "React",
+      "AWS Lambda",
+      "DynamoDB",
+      "Terraform"
+    ]
+  }
+]

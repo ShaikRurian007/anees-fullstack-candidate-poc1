@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2019-05-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "functionKey": {
+      "type": "string"
+    },
+    "functionUrl": {
+      "type": "string"
+    }
+  },
+  "triggers": {
+    "manual": {
+      "type": "Request",
+      "kind": "Http",
+      "inputs": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "candidate": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "candidate"
+          ]
+        }
+      }
+    }
+  },
+  "actions": {
+    "Call_Function_Report": {
+      "type": "Http",
+      "inputs": {
+        "method": "POST",
+        "uri": "@{parameters('functionUrl')}",
+        "headers": {
+          "x-functions-key": "@{parameters('functionKey')}"
+        },
+        "body": "@triggerBody()"
+      },
+      "runAfter": {}
+    }
+  },
+  "outputs": {}
+}

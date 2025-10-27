@@ -1,0 +1,5 @@
+{
+  "name": "CandidateReportTemplate",
+  "subject": "Your Skill Report",
+  "html_content": "<h1>Hi {{name}}</h1><p>Your overall score: {{score}}</p><p>Gaps: {{gaps}}</p>"
+}

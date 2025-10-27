@@ -1,0 +1,61 @@
+{
+  "info": {
+    "name": "Candidate Full\u2011Stack PoC",
+    "_postman_id": "f6f2a2d0-0000-4e2f-aaaa-000000000001",
+    "description": "APIs for scoring and feedback",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Generate Score",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base}}/generate-score",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "generate-score"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"candidate\": {\n    \"id\": 1,\n    \"name\": \"Ananya Gupta\",\n    \"email\": \"ananya@example.com\",\n    \"experience\": 4,\n    \"skills\": [\n      \"JavaScript\",\n      \"React\",\n      \"Node.js\",\n      \"SQL\"\n    ]\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Generate Feedback",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base}}/generate-feedback",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "generate-feedback"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"candidate\": {\n    \"id\": 1,\n    \"name\": \"Ananya Gupta\",\n    \"email\": \"ananya@example.com\",\n    \"experience\": 4,\n    \"skills\": [\n      \"JavaScript\",\n      \"React\",\n      \"Node.js\",\n      \"SQL\"\n    ]\n  }\n}"
+        }
+      }
+    }
+  ],
+  "event": []
+}

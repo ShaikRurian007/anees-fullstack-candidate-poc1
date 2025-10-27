@@ -1,0 +1,15 @@
+{
+  "id": "candidates",
+  "partitionKey": "/id",
+  "exampleDocument": {
+    "id": "1",
+    "name": "Ananya Gupta",
+    "email": "ananya@example.com",
+    "experience": 4,
+    "skills": [
+      "JavaScript",
+      "React",
+      "Node.js"
+    ]
+  }
+}
