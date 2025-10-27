@@ -1,0 +1,17 @@
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Redirect /api/* to your Azure Functions backend
+[[redirects]]
+  from = "/api/*"
+  to = "https://anees-candidate-poc-c2azfjg9ejeygseg.eastus2-01.azurewebsites.net/api/:splat"
+  status = 200
+  force = true
