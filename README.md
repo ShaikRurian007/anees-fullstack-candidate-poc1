@@ -51,13 +51,52 @@ Create `.env.local` from the example and set:
 ## Deploy
 
 ### Backend → Azure Functions (Node/TypeScript)
+
+**Prerequisites:**
+```bash
+# Install Azure CLI
+# Linux (Ubuntu/Debian)
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+# macOS
+brew install azure-cli
+
+# Windows (using winget)
+winget install Microsoft.AzureCLI
+
+# Windows (using MSI installer)
+# Download from: https://aka.ms/installazurecliwindows
+```
+
+```bash
+# Install Azure Functions Core Tools
+# Linux (Ubuntu/Debian)
+sudo apt-get install azure-functions-core-tools-4
+
+# macOS
+brew install azure-functions-core-tools@4
+
+# Windows (using npm)
+npm install -g azure-functions-core-tools@4 --unsafe-perm true
+
+# Windows (using Chocolatey)
+choco install azure-functions-core-tools
+```
+
+**Deploy:**
 - Provision a Functions app (Linux, Node 20 LTS).
 - Set Application Settings (same as `local.settings.json`). Include CORS allowed origins.
-- `cd backend-azure && npm run build && func azure functionapp publish <YOUR_FUNCTION_APP_NAME>`
-  - Or use GitHub Actions/Azure Pipelines.
 
-### Frontend → Vercel
-- Import `frontend/` in Vercel.
+```bash
+cd backend-azure
+npm run build
+func azure functionapp publish <YOUR_FUNCTION_APP_NAME>
+```
+
+Or use GitHub Actions/Azure Pipelines for CI/CD.
+
+### Frontend → Netlify / Vercel
+- Import `frontend/` in Netlify or Vercel.
 - Set env `NEXT_PUBLIC_API_BASE` to your Functions URL + `/api` (e.g., `https://<app>.azurewebsites.net/api`).
 - Deploy.
 
@@ -70,15 +109,50 @@ Create `.env.local` from the example and set:
 ---
 
 ## Postman & Load Test
-- Import `postman/FullStackFeature.postman_collection.json` and the environment file. Hit `/generate-score` and `/generate-feedback`.
-- Run `k6 run workflows/k6/test-generate-score.js` (requires k6).
+
+### Postman Collection
+- Import `postman/FullStackFeature.postman_collection.json` and the environment file. 
+- Hit `/generate-score` and `/generate-feedback` endpoints.
+
+### k6 Performance Test
+**Install k6:**
+
+```bash
+# Linux (Ubuntu/Debian)
+sudo snap install k6
+
+# macOS
+brew install k6
+
+# Windows (using Chocolatey)
+choco install k6
+
+# Windows (using winget)
+winget install k6 --source winget
+```
+
+**Run the test:**
+
+```bash
+# Test production endpoint
+k6 run workflows/k6/test-generate-score.js
+
+# Test local development
+BASE_URL=http://localhost:7071/api k6 run workflows/k6/test-generate-score.js
+```
+
+- **📊 Performance Results**: See [PERFORMANCE.md](./PERFORMANCE.md) for detailed test results
+  - ✅ p95 latency: **332ms** (target: <500ms)
+  - ✅ 100% success rate under load
+  - ✅ 12.36 requests/second sustained
 
 ---
 
 ## Performance Notes
-- FE interaction aims <200ms by optimistic UI and minimal payloads.
-- BE endpoint p95 <100ms locally (rule‑based scoring; no external calls). See k6 script for baseline tests.
-- For production, run Azure Functions in a plan with warm instances and enable compression and HTTP/2.
+- **FE interaction**: <200ms via optimistic UI and minimal payloads
+- **BE endpoint p95**: **332ms** in production (Azure Functions East US 2)
+- **Tested**: 10 concurrent users over 30 seconds (380 requests, 0% failure rate)
+- For production: Enable warm instances, compression, HTTP/2, and Application Insights
 
 ---
 
@@ -90,7 +164,7 @@ Create `.env.local` from the example and set:
 ---
 
 ## Tech
-- **FE**: Next.js 14 App Router, TypeScript, Tailwind, minimal components.
+- **FE**: Next.js 14 App Router, TypeScript, Tailwind, Framer Motion (mobile-responsive)
 - **BE**: Azure Functions v4, TypeScript, @azure/cosmos (optional), @sendgrid/mail (optional).
 - **Infra**: Logic Apps sample workflow, SendGrid sample, Postman, k6 test.
 
