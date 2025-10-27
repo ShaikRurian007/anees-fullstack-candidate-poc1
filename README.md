@@ -5,8 +5,6 @@ A production‑ready proof‑of‑concept showing an end‑to‑end flow:
 - **BE (Azure Functions, TypeScript)**: `/generate-score` returns structured scoring JSON; `/generate-feedback` returns actionable suggestions; background `/generate-report` (for Logic Apps) persists to CosmosDB and sends a transactional email via SendGrid.
 - **Background**: Sample Azure Logic Apps workflow calling the report endpoint; Cosmos DB & MongoDB schemas; Postman collection; k6 performance test.
 
-> NOTE: This repo is deploy‑ready. You just need to set environment variables and deploy FE to **Vercel** and BE to **Azure Functions**. The FE defaults to reading a local JSON for the candidate list and calls the Functions app for scoring/feedback.
-
 ## Monorepo Structure
 ```
 frontend/                # Next.js (Vercel) front-end
@@ -95,3 +93,6 @@ Create `.env.local` from the example and set:
 - **FE**: Next.js 14 App Router, TypeScript, Tailwind, minimal components.
 - **BE**: Azure Functions v4, TypeScript, @azure/cosmos (optional), @sendgrid/mail (optional).
 - **Infra**: Logic Apps sample workflow, SendGrid sample, Postman, k6 test.
+
+##Thanks & Regards,
+**Shaik Mohammed Anees**
