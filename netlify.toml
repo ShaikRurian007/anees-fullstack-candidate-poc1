@@ -8,6 +8,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  NEXT_TELEMETRY_DISABLED = "1"
 
 # Redirect /api/* to your Azure Functions backend
 [[redirects]]
@@ -15,3 +16,12 @@
   to = "https://anees-candidate-poc-c2azfjg9ejeygseg.eastus2-01.azurewebsites.net/api/:splat"
   status = 200
   force = true
+  headers = {X-From = "Netlify"}
+
+# Ensure proper content type for CSS
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
