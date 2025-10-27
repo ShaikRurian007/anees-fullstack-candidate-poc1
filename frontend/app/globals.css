@@ -16,6 +16,11 @@ html, body {
   height: 100%;
   background: radial-gradient(1200px 600px at 10% 10%, #111a30 0%, #0a0f1f 60%, #070b18 100%);
   color: white;
+  /* Improve mobile text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent text size adjustment on orientation change */
+  -webkit-text-size-adjust: 100%;
 }
 
 .btn:active { transform: scale(0.98); }
@@ -23,8 +28,15 @@ html, body {
 .card {
   background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
+  border-radius: 12px;
   backdrop-filter: blur(6px);
+}
+
+/* Mobile: slightly larger border radius */
+@media (min-width: 640px) {
+  .card {
+    border-radius: 16px;
+  }
 }
 
 .btn {
@@ -32,9 +44,22 @@ html, body {
   background: linear-gradient(180deg, #2b3a63, #1a2442);
   border: 1px solid rgba(255,255,255,0.08);
   transition: transform 120ms ease, filter 120ms ease;
+  /* Minimum touch target size for mobile */
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
+
 .btn:hover {
   filter: brightness(1.05);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .progress {
@@ -43,11 +68,44 @@ html, body {
   border-radius: 8px;
   overflow: hidden;
 }
+
 .progress > div {
   height: 100%;
   background: linear-gradient(90deg, #4f8cff, #60a5fa);
 }
+
 .tag {
   @apply text-xs px-2 py-1 rounded;
   background: rgba(255,255,255,0.1);
+  white-space: nowrap;
 }
+
+/* Better scrollbar styling for mobile webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* Ensure touch-friendly link spacing */
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Better form control sizing on mobile */
+input, textarea, select {
+  font-size: 16px; /* Prevents zoom on iOS */
+}
+
