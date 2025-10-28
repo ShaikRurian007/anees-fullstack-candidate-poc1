@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, useRef } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import candidates from '../../../../data/candidates.json'
-import { generateScore, generateFeedback } from '@/lib/api'
+import { generateScore, generateFeedback, sendReportEmail } from '@/lib/api'
 import ScoreCard from '@/components/ScoreCard'
 import FeedbackPanel from '@/components/FeedbackPanel'
 import Skeleton from '@/components/Skeleton'
@@ -81,7 +81,13 @@ export default function CandidateDetailPage() {
 
   const onFeedback = async () => {
     setLoading(true)
-    try { setFeedback(await generateFeedback({ candidate, score })) }
+    try { 
+      const [feedbackResult] = await Promise.all([
+        generateFeedback({ candidate, score }),
+        sendReportEmail({ candidate, score })
+      ])
+      setFeedback(feedbackResult)
+    }
     finally { setLoading(false) }
   }
 
